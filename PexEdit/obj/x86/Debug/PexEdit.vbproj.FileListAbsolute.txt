@@ -1,0 +1,36 @@
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.exe
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.pdb
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.xml
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.Main.resources
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.Resources.resources
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.exe
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.xml
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.pdb
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.exe.config
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\bin\Debug\PexEdit.exe.config
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\PexEdit.exe
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\PexEdit.xml
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\PexEdit.pdb
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\bin\Debug\PexEdit.exe
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\bin\Debug\PexEdit.pdb
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\bin\Debug\PexEdit.xml
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\WindowsApplication1.Main.resources
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\WindowsApplication1.Resources.resources
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit - Backup\PexEdit\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Alex\Development\visual studio 2010\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.OptionEditor.resources
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.exe.config
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.exe
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.pdb
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\bin\Debug\PexEdit.xml
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.OptionEditor.resources
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.Main.resources
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\WindowsApplication1.Resources.resources
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\PexEdit\PexEdit\obj\x86\Debug\PexEdit.vbproj.GenerateResource.Cache
