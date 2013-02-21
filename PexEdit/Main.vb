@@ -396,7 +396,9 @@ Public Class Main
         TreeViewG.Nodes(gname).Nodes("prefix").Nodes.Add("All worlds", "All worlds : None set")
         TreeViewG.Nodes(gname).Nodes.Add("inheritance", "Inherits")
         TreeViewG.Nodes(gname).Nodes.Add("permissions", "Permissions")
-        TreeViewG.Nodes(gname).Nodes("permissions").Nodes.Add("All worlds", "All worlds : None set")
+        TreeViewG.Nodes(gname).Nodes("permissions").Nodes.Add("All worlds", "All worlds")
+        TreeViewG.Nodes(gname).Nodes.Add("options", "Options")
+        TreeViewG.Nodes(gname).Nodes("options").Nodes.Add("rank", "Rank : 0")
         TreeViewG.Nodes(gname).Expand()
         TreeViewG.SelectedNode = TreeViewG.Nodes(gname)
         WriteChanges()
@@ -1080,7 +1082,34 @@ showoptdialog:
         End If
     End Sub
 #Region "Actions tab"
-
+    Private Sub BtnAddUser_Click(sender As Object, e As EventArgs) Handles BtnAddUser.Click
+        If ComboNewUser.Text = "" Then
+            MsgBox("Please enter a name", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+        If ComboNewUser.Text.Contains(CChar(" ")) OrElse ComboNewUser.Text.Contains(CChar(":")) OrElse ComboNewUser.Text.Contains(CChar("'")) Then
+            MsgBox("Please do not use " & CStr(IIf(ComboNewUser.Text.Contains(" "), "spaces", "")) & CStr(IIf(ComboNewUser.Text.Contains(" ") And ComboNewUser.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboNewUser.Text.Contains(":"), "colons", "")) & CStr(IIf(ComboNewUser.Text.Contains(":") And ComboNewUser.Text.Contains(CChar("'")), " nor ", "")) & CStr(IIf(ComboNewUser.Text.Contains(" ") And ComboNewUser.Text.Contains(CChar("'")) And Not ComboNewUser.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboNewUser.Text.Contains("'"), "apostrophes", "")) & " in group name", MsgBoxStyle.Exclamation, "Warning")
+            Exit Sub
+        End If
+        For Each scanuser In groupslist
+            If scanuser.name = ComboNewUser.Text Then
+                TreeViewU.SelectedNode = TreeViewU.Nodes(scanuser.name)
+                Exit Sub
+            End If
+        Next
+        Dim uname As String = ComboNewUser.Text
+        userslist.Add(New User(uname))
+        TreeViewU.Nodes.Add(uname, uname)
+        TreeViewU.Nodes(uname).Nodes.Add("prefix", "Prefix(es)")
+        TreeViewU.Nodes(uname).Nodes("prefix").Nodes.Add("All worlds", "All worlds : None set")
+        TreeViewU.Nodes(uname).Nodes.Add("groups", "Groups")
+        TreeViewU.Nodes(uname).Nodes("groups").Nodes.Add("All worlds", "All worlds")
+        TreeViewU.Nodes(uname).Nodes.Add("permissions", "Permissions")
+        TreeViewU.Nodes(uname).Nodes("permissions").Nodes.Add("All worlds", "All worlds")
+        TreeViewU.Nodes(uname).Expand()
+        TreeViewU.SelectedNode = TreeViewU.Nodes(uname)
+        WriteChanges()
+    End Sub
 #End Region
 #Region "Prefix and groups tab"
     Private Sub TabPageUsers_Prefix_Enter(sender As Object, e As EventArgs) Handles TabPageUsers_Prefix.Enter
@@ -1154,6 +1183,36 @@ showoptdialog:
     End Sub
     Private Sub LstBxUPrefixWorlds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LstBxUPrefixWorlds.SelectedIndexChanged
         refreshuprefixtab()
+    End Sub
+
+    Private Sub BtnUAddWorld_Click(sender As System.Object, e As System.EventArgs) Handles BtnUAddWorld.Click
+        If ComboUNewWorldName.Text = "" Then
+            MsgBox("Please enter a name", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+        If ComboUNewWorldName.Text.Contains(CChar(" ")) OrElse ComboUNewWorldName.Text.Contains(CChar(":")) OrElse ComboUNewWorldName.Text.Contains(CChar("'")) Then
+            MsgBox("Please do not use " & CStr(IIf(ComboUNewWorldName.Text.Contains(" "), "spaces", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(" ") And ComboUNewWorldName.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(":"), "colons", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(":") And ComboUNewWorldName.Text.Contains(CChar("'")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(" ") And ComboUNewWorldName.Text.Contains(CChar("'")) And Not ComboUNewWorldName.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains("'"), "apostrophes", "")) & " in the world name", MsgBoxStyle.Exclamation, "Warning")
+            Exit Sub
+        End If
+        For Each scanworld In currentuser.getworlds
+            If ComboUNewWorldName.Text = scanworld.name Then
+                Exit Sub
+            End If
+        Next
+        currentuser.getworlds.Add(New World(ComboUNewWorldName.Text))
+        TreeViewU.Nodes(currentuser.name).Nodes("prefix").Nodes.Add(ComboUNewWorldName.Text, ComboUNewWorldName.Text & " : None set")
+        TreeViewU.Nodes(currentuser.name).Nodes("groups").Nodes.Add(ComboUNewWorldName.Text, ComboUNewWorldName.Text)
+        TreeViewU.Nodes(currentuser.name).Nodes("permissions").Nodes.Add(ComboUNewWorldName.Text, ComboUNewWorldName.Text)
+        LstBxUPrefixWorlds.Items.Add(ComboUNewWorldName.Text)
+        ComboUPermWorld.Items.Add(ComboUNewWorldName.Text)
+        LstBxUPrefixWorlds.SelectedItem = ComboUNewWorldName.Name
+        ComboUNewWorldName.Text = "New world"
+        WriteChanges()
+    End Sub
+    Private Sub ComboUNewWorldName_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles ComboUNewWorldName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnUAddWorld_Click(sender, e)
+        End If
     End Sub
     Private Sub BtnURmWorld_Click(sender As System.Object, e As System.EventArgs) Handles BtnURmWorld.Click
         If MsgBox("Are you sure you want to delete " & LstBxUPrefixWorlds.SelectedItem.ToString & " world and all its content?", CType(MsgBoxStyle.YesNo + MsgBoxStyle.Question, MsgBoxStyle)) = MsgBoxResult.Yes Then
@@ -1268,34 +1327,6 @@ showoptdialog:
             Next
             TxtBxPrefix.Text = "None set"
             WriteChanges()
-        End If
-    End Sub
-    Private Sub BtnUAddWorld_Click(sender As System.Object, e As System.EventArgs) Handles BtnUAddWorld.Click
-        If ComboUNewWorldName.Text = "" Then
-            MsgBox("Please enter a name", MsgBoxStyle.Exclamation, "Error")
-            Exit Sub
-        End If
-        If ComboUNewWorldName.Text.Contains(CChar(" ")) OrElse ComboUNewWorldName.Text.Contains(CChar(":")) OrElse ComboUNewWorldName.Text.Contains(CChar("'")) Then
-            MsgBox("Please do not use " & CStr(IIf(ComboUNewWorldName.Text.Contains(" "), "spaces", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(" ") And ComboUNewWorldName.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(":"), "colons", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(":") And ComboUNewWorldName.Text.Contains(CChar("'")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains(" ") And ComboUNewWorldName.Text.Contains(CChar("'")) And Not ComboUNewWorldName.Text.Contains(CChar(":")), " nor ", "")) & CStr(IIf(ComboUNewWorldName.Text.Contains("'"), "apostrophes", "")) & " in the world name", MsgBoxStyle.Exclamation, "Warning")
-            Exit Sub
-        End If
-        For Each scanworld In currentuser.getworlds
-            If ComboUNewWorldName.Text = scanworld.name Then
-                Exit Sub
-            End If
-        Next
-        currentuser.getworlds.Add(New World(ComboUNewWorldName.Text))
-        TreeViewU.Nodes(currentuser.name).Nodes("prefix").Nodes.Add(ComboUNewWorldName.Text, ComboUNewWorldName.Text & " : None set")
-        TreeViewU.Nodes(currentuser.name).Nodes("permissions").Nodes.Add(ComboUNewWorldName.Text, ComboUNewWorldName.Text)
-        LstBxUPrefixWorlds.Items.Add(ComboUNewWorldName.Text)
-        ComboUPermWorld.Items.Add(ComboUNewWorldName.Text)
-        LstBxUPrefixWorlds.SelectedItem = ComboUNewWorldName.Name
-        ComboUNewWorldName.Text = "New world"
-        WriteChanges()
-    End Sub
-    Private Sub ComboUNewWorldName_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles ComboUNewWorldName.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            BtnUAddWorld_Click(sender, e)
         End If
     End Sub
 #End Region
@@ -1608,21 +1639,15 @@ showoptdialog:
                     TreeViewU.Nodes(treeuser.name).Nodes.Add("groups", "Groups")
                     TreeViewU.Nodes(treeuser.name).Nodes.Add("permissions", "Permissions")
                     For Each treeworld In treeuser.getworlds()
-                        If TreeViewU.Nodes(treeuser.name).Nodes.IndexOfKey("prefix") >= 0 Then
-                            TreeViewU.Nodes(treeuser.name).Nodes("prefix").Nodes.Add(treeworld.name, treeworld.name & " : " & treeworld.prefix)
-                        End If
-                        If TreeViewU.Nodes(treeuser.name).Nodes.IndexOfKey("permissions") >= 0 Then
-                            TreeViewU.Nodes(treeuser.name).Nodes("permissions").Nodes.Add(treeworld.name, treeworld.name)
-                            For Each treeperm As Permission In treeuser.world(treeworld.name).permissions()
-                                TreeViewU.Nodes(treeuser.name).Nodes("permissions").Nodes(treeworld.name).Nodes.Add(treeperm.text, treeperm.text & " : " & treeperm.state)
-                            Next
-                        End If
-                        If TreeViewU.Nodes(treeuser.name).Nodes.IndexOfKey("groups") >= 0 Then
-                            TreeViewU.Nodes(treeuser.name).Nodes("groups").Nodes.Add(treeworld.name, treeworld.name)
-                            For Each groupname As String In treeworld.getgroups
-                                TreeViewU.Nodes(treeuser.name).Nodes("groups").Nodes(treeworld.name).Nodes.Add(groupname, groupname)
-                            Next
-                        End If
+                        TreeViewU.Nodes(treeuser.name).Nodes("prefix").Nodes.Add(treeworld.name, treeworld.name & " : " & treeworld.prefix)
+                        TreeViewU.Nodes(treeuser.name).Nodes("permissions").Nodes.Add(treeworld.name, treeworld.name)
+                        For Each treeperm As Permission In treeuser.world(treeworld.name).permissions()
+                            TreeViewU.Nodes(treeuser.name).Nodes("permissions").Nodes(treeworld.name).Nodes.Add(treeperm.text, treeperm.text & " : " & treeperm.state)
+                        Next
+                        TreeViewU.Nodes(treeuser.name).Nodes("groups").Nodes.Add(treeworld.name, treeworld.name)
+                        For Each groupname As String In treeworld.getgroups
+                            TreeViewU.Nodes(treeuser.name).Nodes("groups").Nodes(treeworld.name).Nodes.Add(groupname, groupname)
+                        Next
                     Next
                 Next
         End Select
