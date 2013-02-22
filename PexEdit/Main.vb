@@ -469,8 +469,8 @@ Public Class Main
         If MsgBox("Are you sure you want to delete " & currentgroup.name & " group and all its content?", CType(MsgBoxStyle.YesNo + MsgBoxStyle.Question, MsgBoxStyle)) = MsgBoxResult.Yes Then
             groupslist.Remove(currentgroup)
             StatusLabel1.Text = "Deleted group: " & currentgroup.name
+            TreeViewG.Nodes(currentgroup.name).Remove()
             currentgroup = Nothing
-            populatetreeview(1)
             TabControlGroups.SelectTab(0)
             WriteChanges()
         End If
@@ -1109,6 +1109,16 @@ showoptdialog:
         TreeViewU.Nodes(uname).Expand()
         TreeViewU.SelectedNode = TreeViewU.Nodes(uname)
         WriteChanges()
+    End Sub
+    Private Sub BtnURm_Click(sender As Object, e As EventArgs) Handles BtnURm.Click
+        If MsgBox("Are you sure you want to delete " & currentuser.name & " user and all its content?", CType(MsgBoxStyle.YesNo + MsgBoxStyle.Question, MsgBoxStyle)) = MsgBoxResult.Yes Then
+            userslist.Remove(currentuser)
+            StatusLabel1.Text = "Deleted user: " & currentuser.name
+            TreeViewU.Nodes(currentuser.name).Remove()
+            currentuser = Nothing
+            TabControlUsers.SelectTab(0)
+            WriteChanges()
+        End If
     End Sub
 #End Region
 #Region "Prefix and groups tab"
@@ -1925,7 +1935,6 @@ showoptdialog:
         Loop While ok = False
     End Sub
 #End Region
-
 
 End Class
 
