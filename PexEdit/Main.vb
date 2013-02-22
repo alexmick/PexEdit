@@ -512,12 +512,12 @@ Public Class Main
                 '                   ^ using 0 is OK because options have not yet been sorted
             End If
         Next
-        TreeViewG.Nodes.Add(CType(TreeViewG.Nodes(currentgroup.name).Clone, TreeNode))
-        TreeViewG.Nodes(currentgroup.name).Name = newgroup.name
-        TreeViewG.Nodes(currentgroup.name).Text = newgroup.name
+        TreeViewU.Nodes.Add(CType(TreeViewU.Nodes(currentgroup.name).Clone, TreeNode))
+        TreeViewU.Nodes(currentgroup.name).Name = newgroup.name
+        TreeViewU.Nodes(currentgroup.name).Text = newgroup.name
         StatusLabel1.Text = "Duplicated group: " & TxtBxGroupname.Text
         sortlists()
-        TreeViewG.SelectedNode = TreeViewG.Nodes(newgroup.name)
+        TreeViewU.SelectedNode = TreeViewU.Nodes(newgroup.name)
         WriteChanges()
     End Sub
 
@@ -1073,9 +1073,14 @@ showoptdialog:
                             ComboUPermWorld.SelectedItem = TreeViewU.SelectedNode.Name
                     End Select
                 Case 3
-                    TabControlUsers.SelectTab(2)
-                    ComboUPermWorld.SelectedItem = TreeViewU.SelectedNode.Name
-                    LstVwUserPerms.Items(TreeViewG.SelectedNode.Index).Selected = True
+                    Select Case TreeViewU.SelectedNode.Parent.Parent.Name
+                        Case "groups"
+                            'TODO: when groups editing is handled
+                        Case "permissions"
+                            TabControlUsers.SelectTab(2)
+                            ComboUPermWorld.SelectedItem = TreeViewU.SelectedNode.Name
+                            LstVwUserPerms.Items(TreeViewG.SelectedNode.Index).Selected = True
+                    End Select
             End Select
         Else
             justselect = False
@@ -1119,6 +1124,40 @@ showoptdialog:
             TabControlUsers.SelectTab(0)
             WriteChanges()
         End If
+    End Sub
+    Private Sub BtnUDuplicate_Click(sender As Object, e As EventArgs) Handles BtnUDuplicate.Click
+        Dim newuser As New User(currentuser.name)
+        Dim found As Boolean
+        Do
+            found = False
+            newuser.name += ".copy"
+            For Each scanu In userslist
+                If scanu.name = newuser.name Then
+                    found = True
+                End If
+            Next
+        Loop While found = True
+        userslist.Add(newuser)
+        For Each scanworld In newuser.getworlds
+            If scanworld.name <> "All worlds" Then
+                newuser.addworld(scanworld.name)
+            End If
+            newuser.getworlds(newuser.getworlds.Count - 1).prefix = scanworld.prefix
+            For Each scangroup In scanworld.getgroups
+                newuser.getworlds(newuser.getworlds.Count - 1).addgroup(scangroup)
+                '                      ^ get the last added node
+            Next
+            For Each scanperm In scanworld.permissions
+                newuser.getworlds(newuser.getworlds.Count - 1).addperm(scanperm.text, scanperm.state)
+            Next
+        Next
+        TreeViewU.Nodes.Add(CType(TreeViewU.Nodes(currentuser.name).Clone, TreeNode))
+        TreeViewU.Nodes(currentuser.name).Name = newuser.name
+        TreeViewU.Nodes(currentuser.name).Text = newuser.name
+        StatusLabel1.Text = "Duplicated user: " & TxtBxUName.Text
+        sortlists()
+        TreeViewU.SelectedNode = TreeViewU.Nodes(newuser.name)
+        WriteChanges()
     End Sub
 #End Region
 #Region "Prefix and groups tab"
