@@ -144,7 +144,6 @@ Partial Class Main
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BtnURmPerm = New System.Windows.Forms.Button()
         Me.BtnUAddPerm = New System.Windows.Forms.Button()
-        Me.ComboUNewPerm = New System.Windows.Forms.ComboBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1106,24 +1105,24 @@ Partial Class Main
         '
         Me.CntxtMenuPerms.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntxtMenuPermsEditItem, Me.CntxtMenuPermsDuplicateItem, Me.CntxtMenuPermsRemoveItem})
         Me.CntxtMenuPerms.Name = "CntxtMenuPerms"
-        Me.CntxtMenuPerms.Size = New System.Drawing.Size(125, 70)
+        Me.CntxtMenuPerms.Size = New System.Drawing.Size(153, 92)
         '
         'CntxtMenuPermsEditItem
         '
         Me.CntxtMenuPermsEditItem.Name = "CntxtMenuPermsEditItem"
-        Me.CntxtMenuPermsEditItem.Size = New System.Drawing.Size(124, 22)
+        Me.CntxtMenuPermsEditItem.Size = New System.Drawing.Size(152, 22)
         Me.CntxtMenuPermsEditItem.Text = "Edit"
         '
         'CntxtMenuPermsDuplicateItem
         '
         Me.CntxtMenuPermsDuplicateItem.Name = "CntxtMenuPermsDuplicateItem"
-        Me.CntxtMenuPermsDuplicateItem.Size = New System.Drawing.Size(124, 22)
+        Me.CntxtMenuPermsDuplicateItem.Size = New System.Drawing.Size(152, 22)
         Me.CntxtMenuPermsDuplicateItem.Text = "Duplicate"
         '
         'CntxtMenuPermsRemoveItem
         '
         Me.CntxtMenuPermsRemoveItem.Name = "CntxtMenuPermsRemoveItem"
-        Me.CntxtMenuPermsRemoveItem.Size = New System.Drawing.Size(124, 22)
+        Me.CntxtMenuPermsRemoveItem.Size = New System.Drawing.Size(152, 22)
         Me.CntxtMenuPermsRemoveItem.Text = "Remove"
         '
         'BtnRmPerm
@@ -1559,7 +1558,6 @@ Partial Class Main
         '
         Me.SplitContainerUPermsTab1.Panel2.Controls.Add(Me.BtnURmPerm)
         Me.SplitContainerUPermsTab1.Panel2.Controls.Add(Me.BtnUAddPerm)
-        Me.SplitContainerUPermsTab1.Panel2.Controls.Add(Me.ComboUNewPerm)
         Me.SplitContainerUPermsTab1.Size = New System.Drawing.Size(629, 371)
         Me.SplitContainerUPermsTab1.SplitterDistance = 328
         Me.SplitContainerUPermsTab1.TabIndex = 13
@@ -1657,17 +1655,6 @@ Partial Class Main
         Me.BtnUAddPerm.Size = New System.Drawing.Size(37, 31)
         Me.BtnUAddPerm.TabIndex = 7
         Me.BtnUAddPerm.UseVisualStyleBackColor = True
-        '
-        'ComboUNewPerm
-        '
-        Me.ComboUNewPerm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.ComboUNewPerm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboUNewPerm.FormattingEnabled = True
-        Me.ComboUNewPerm.Location = New System.Drawing.Point(3, 10)
-        Me.ComboUNewPerm.Name = "ComboUNewPerm"
-        Me.ComboUNewPerm.Size = New System.Drawing.Size(537, 21)
-        Me.ComboUNewPerm.Sorted = True
-        Me.ComboUNewPerm.TabIndex = 1
         '
         'SaveFileDialog1
         '
@@ -2182,7 +2169,6 @@ Partial Class Main
     Friend WithEvents LblUPermissions1 As System.Windows.Forms.Label
     Friend WithEvents BtnURmPerm As System.Windows.Forms.Button
     Friend WithEvents BtnUAddPerm As System.Windows.Forms.Button
-    Friend WithEvents ComboUNewPerm As System.Windows.Forms.ComboBox
     Friend WithEvents SplitContainerUWorldSettings As System.Windows.Forms.SplitContainer
     Friend WithEvents GpbxUWorldselect As System.Windows.Forms.GroupBox
     Friend WithEvents SplitContainerUWorldSelection As System.Windows.Forms.SplitContainer

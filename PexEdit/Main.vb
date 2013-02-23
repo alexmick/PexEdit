@@ -329,9 +329,6 @@ Public Class Main
                 TempStr(1) = scanoption.value
                 LstVwGrpOptions.Items.Add(New ListViewItem(TempStr))
             Next
-            refreshprefixtab()
-            refreshpermtab()
-
             'Handle where the treenode was clicked
             Select Case TreeViewG.SelectedNode.Level
                 Case 0
@@ -363,9 +360,9 @@ Public Class Main
                             LstVwGrpOptions.Items(TreeViewG.SelectedNode.Index).Selected = True
                     End Select
                 Case 3
-                    TabControlGroups.SelectTab(3)
                     ComboPermWorld.SelectedItem = TreeViewG.SelectedNode.Parent.Name
                     LstVwGroupPerms.Items(TreeViewG.SelectedNode.Index).Selected = True
+                    TabControlGroups.SelectTab(3)
             End Select
         Else
             justselect = False
@@ -932,7 +929,7 @@ showoptdialog:
             TreeViewG.Nodes(currentgroup.name).Expand()
             TreeViewG.Nodes(currentgroup.name).Nodes("permissions").Expand()
             justselect = True
-            TreeViewG.SelectedNode = TreeViewG.Nodes(currentgroup.name).Nodes("permissions")
+            'TreeViewG.SelectedNode = TreeViewG.Nodes(currentgroup.name).Nodes("permissions")
         End If
         refreshpermtab()
     End Sub
@@ -968,6 +965,12 @@ showoptdialog:
             CntxtMenuPerms.Items(1).Enabled = False
             CntxtMenuPerms.Items(2).Enabled = False
         End If
+    End Sub
+    Private Sub CntxtMenuPermsEditItem_Click(sender As Object, e As EventArgs) Handles CntxtMenuPermsEditItem.Click
+
+    End Sub
+    Private Sub CntxtMenuPermsRemoveItem_Click(sender As Object, e As EventArgs) Handles CntxtMenuPermsRemoveItem.Click
+
     End Sub
     Private Sub BtnAddPerm_Click(sender As System.Object, e As System.EventArgs) Handles BtnAddPerm.Click
         Dim permdialog As New PermEditor(permsuggest)
@@ -1008,7 +1011,7 @@ showoptdialog:
         End If
     End Sub
     Private Sub BtnRmPerm_Click(sender As System.Object, e As System.EventArgs) Handles BtnRmPerm.Click
-        If Not LstVwGroupPerms.SelectedItems Is Nothing Then
+        If LstVwGroupPerms.SelectedItems.Count() > 0 Then
             Dim toremove As New List(Of Integer)
             For Each scanperm In currentworld.permissions
                 If scanperm.text = LstVwGroupPerms.SelectedItems(0).Text Then
@@ -1974,6 +1977,7 @@ showoptdialog:
         Loop While ok = False
     End Sub
 #End Region
+
 
 End Class
 
