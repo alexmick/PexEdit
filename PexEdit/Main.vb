@@ -956,18 +956,10 @@ showoptdialog:
         End If
     End Sub
     Private Sub CntxtMenuPerms_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles CntxtMenuPerms.Opening
-        If LstVwGroupPerms.SelectedItems.Count = 1 Then
-            CntxtMenuPerms.Items(0).Enabled = True
-            CntxtMenuPerms.Items(1).Enabled = True
-            CntxtMenuPerms.Items(2).Enabled = True
-        Else
-            CntxtMenuPerms.Items(0).Enabled = False
-            CntxtMenuPerms.Items(1).Enabled = False
-            CntxtMenuPerms.Items(2).Enabled = False
-        End If
-    End Sub
-    Private Sub CntxtMenuPermsEditItem_Click(sender As Object, e As EventArgs) Handles CntxtMenuPermsEditItem.Click
-
+            CntxtMenuPerms.Items(0).Enabled = (LstVwGroupPerms.SelectedItems.Count = 1)
+            CntxtMenuPerms.Items(1).Enabled = (LstVwGroupPerms.SelectedItems.Count > 0)
+            CntxtMenuPerms.Items(2).Enabled = (LstVwGroupPerms.SelectedItems.Count > 0)
+            CntxtMenuPerms.Items(3).Enabled = (LstVwGroupPerms.SelectedItems.Count > 0)
     End Sub
     Private Sub CntxtMenuPermsRemoveItem_Click(sender As Object, e As EventArgs) Handles CntxtMenuPermsRemoveItem.Click
 
@@ -993,9 +985,7 @@ showoptdialog:
         permdialog = Nothing
     End Sub
     Private Sub LstVwGroupPerms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LstVwGroupPerms.SelectedIndexChanged
-        If Not LstVwGroupPerms.SelectedItems Is Nothing Then
-            BtnRmPerm.Enabled = True
-        End If
+        BtnRmPerm.Enabled = (LstVwGroupPerms.SelectedItems.Count > 0)
     End Sub
     Private Sub LstBxGroupPerms_ItemCheck(sender As Object, e As System.Windows.Forms.ItemCheckEventArgs) Handles LstVwGroupPerms.ItemCheck
         Dim changes As Boolean = False

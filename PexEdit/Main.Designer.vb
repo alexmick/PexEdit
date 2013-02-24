@@ -180,6 +180,7 @@ Partial Class Main
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.BckGrndWrkWritetofile = New System.ComponentModel.BackgroundWorker()
         Me.ToolTipGroup = New System.Windows.Forms.ToolTip(Me.components)
+        Me.CntxtMenuPermsToogleItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1.SuspendLayout()
         Me.TabPageGroups.SuspendLayout()
         CType(Me.SplitContainerGroupsTab, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1103,9 +1104,9 @@ Partial Class Main
         '
         'CntxtMenuPerms
         '
-        Me.CntxtMenuPerms.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntxtMenuPermsEditItem, Me.CntxtMenuPermsDuplicateItem, Me.CntxtMenuPermsRemoveItem})
+        Me.CntxtMenuPerms.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntxtMenuPermsEditItem, Me.CntxtMenuPermsToogleItem, Me.CntxtMenuPermsDuplicateItem, Me.CntxtMenuPermsRemoveItem})
         Me.CntxtMenuPerms.Name = "CntxtMenuPerms"
-        Me.CntxtMenuPerms.Size = New System.Drawing.Size(153, 92)
+        Me.CntxtMenuPerms.Size = New System.Drawing.Size(153, 114)
         '
         'CntxtMenuPermsEditItem
         '
@@ -1912,6 +1913,12 @@ Partial Class Main
         Me.BckGrndWrkWritetofile.WorkerReportsProgress = True
         Me.BckGrndWrkWritetofile.WorkerSupportsCancellation = True
         '
+        'CntxtMenuPermsToogleItem
+        '
+        Me.CntxtMenuPermsToogleItem.Name = "CntxtMenuPermsToogleItem"
+        Me.CntxtMenuPermsToogleItem.Size = New System.Drawing.Size(152, 22)
+        Me.CntxtMenuPermsToogleItem.Text = "Toggle"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2195,5 +2202,6 @@ Partial Class Main
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents LstVwUserPerms As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents CntxtMenuPermsToogleItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
